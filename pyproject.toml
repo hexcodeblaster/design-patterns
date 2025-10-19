@@ -20,6 +20,7 @@ dev = [
     "ruff>=0.1.0",
     "flake8>=7.1.0",
     "pytest-cov",
+    "pre-commit>=3.7.1",
 ]
 
 [tool.setuptools]
