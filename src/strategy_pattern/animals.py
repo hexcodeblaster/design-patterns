@@ -1,4 +1,10 @@
-from strategy_pattern.strategies.animal_strategies.eating_strategies import EatingStrategy, HerbivoreEatingStrategy, CarnivoreEatingStrategy, OmnivoreEatingStrategy
+from strategy_pattern.strategies.animal_strategies.eating_strategies import (
+    EatingStrategy,
+    HerbivoreEatingStrategy,
+    CarnivoreEatingStrategy,
+    OmnivoreEatingStrategy,
+)
+
 
 class Animal:
     def __init__(self, eating_strategy: EatingStrategy) -> None:
@@ -7,13 +13,16 @@ class Animal:
     def eat(self) -> None:
         self.eating_strategy.eat()
 
+
 class Horse(Animal):
     def __init__(self) -> None:
-        super().__init__(eating_strategy = HerbivoreEatingStrategy())
+        super().__init__(eating_strategy=HerbivoreEatingStrategy())
+
 
 class Lion(Animal):
     def __init__(self):
         super().__init__(eating_strategy=CarnivoreEatingStrategy())
+
 
 class Human(Animal):
     def __init__(self):
