@@ -17,8 +17,9 @@ class TimeObserver(IObserver):
         if isinstance(notified_from, Subject):
             hour = notified_from.hour
             minutes = notified_from.minute
-            seconds =notified_from.minute
+            seconds = notified_from.second
             return_string = f"Current time is {hour}:{minutes}:{seconds}"
+            print(return_string)
             return return_string
         return None
 
@@ -36,5 +37,6 @@ class DayObserver(IObserver):
             month = notified_from.month
             year = notified_from.year
             return_string = f"Current date is {day}:{month}:{year}"
+            print(return_string)
             return return_string
         return None
