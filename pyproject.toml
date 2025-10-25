@@ -1,4 +1,3 @@
-# ✅ pyproject.toml
 [build-system]
 requires = ["setuptools>=45", "setuptools-scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
@@ -7,10 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "design_patterns"
 dynamic = ["version"]
 
-dependencies = [
-    # "abc",  # Built-in, no need to specify
-    # "typing",  # Built-in
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
@@ -28,3 +24,4 @@ packages = {find = {where = ["src"]}}
 
 [tool.setuptools.package-dir]
 strategy_pattern = "src/strategy_pattern"
+observer_pattern = "src/observer_pattern"
