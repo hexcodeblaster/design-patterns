@@ -23,6 +23,7 @@ class TimeObserver(IObserver):
             return return_string
         return None
 
+
 class DayObserver(IObserver):
     def subscribe_to_observer(self, observable: IObservable) -> None:
         observable.add_observer(self)

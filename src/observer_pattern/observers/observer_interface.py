@@ -7,5 +7,5 @@ if TYPE_CHECKING:
 
 class IObserver(ABC):
     @abstractmethod
-    def update(self, notified_from: 'IObservable') -> Any:
+    def update(self, notified_from: "IObservable") -> Any:
         pass

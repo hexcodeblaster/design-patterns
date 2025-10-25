@@ -4,6 +4,7 @@ from typing import override
 from observer_pattern.observables.observable_interface import IObservable
 from observer_pattern.observers.observer_interface import IObserver
 
+
 class Subject(IObservable):
     def __init__(self, observers: set[IObserver] | None = None) -> None:
         self._observers = observers or set()
