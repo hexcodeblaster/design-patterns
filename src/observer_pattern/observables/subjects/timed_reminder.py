@@ -5,8 +5,8 @@ from observer_pattern.observables.observable_interface import IObservable
 from observer_pattern.observers.observer_interface import IObserver
 
 class Subject(IObservable):
-    def __init__(self, observer_list: list[IObserver] | None = None) -> None:
-        self._observer_list = observer_list
+    def __init__(self, observers: set[IObserver] | None = None) -> None:
+        self._observers = observers or set()
         self._hour = datetime.now().hour
         self._minute = datetime.now().minute
         self._second = datetime.now().second
@@ -16,15 +16,15 @@ class Subject(IObservable):
 
     @override
     def add_observer(self, observer: IObserver) -> None:
-        self._observer_list.append(observer)
+        self._observers.add(observer)
 
     @override
     def remove_observer(self, observer: IObserver) -> None:
-        self._observer_list.remove(observer)
+        self._observers.remove(observer)
 
     @override
     def notify_observers(self) -> None:
-        for observer in self._observer_list:
+        for observer in self._observers:
             observer.update(self)
 
     @property
