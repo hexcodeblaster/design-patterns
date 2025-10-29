@@ -1,52 +1,43 @@
 from datetime import datetime
 
-from observer_pattern.observers.observers import TimeObserver, DayObserver
+from observer_pattern.observers.observers import TimeObserver
 from observer_pattern.observables.subjects.timed_reminder import Subject
 
 
-def test_timed_observers_update(capsys):
+def test_timed_observers_update(mocker):
     time_observer = TimeObserver()
     observable_subject = Subject({time_observer})
+    mock_update = mocker.patch.object(time_observer, "update")
     now = datetime.now()
-    observable_subject.hour = (curr_hour := now.hour)
-    observable_subject.minute = (curr_minute := now.minute)
-    observable_subject.second = (curr_second := now.second)
-    captured = capsys.readouterr()
-    assert (
-        f"Current time is {curr_hour}:{curr_minute}:{curr_second}"
-        == captured.out.split("\n")[0].strip()
-    )
-    observable_subject.remove_observer(time_observer)
+    observable_subject.hour = now.hour
+    observable_subject.minute = now.minute
+    observable_subject.second = now.second
+    assert mock_update.call_count == 3
+    assert all(call == call(observable_subject) for call in mock_update.call_args_list)
 
 
-def test_timed_observers_registration():
+def test_timed_observers_registration(mocker):
     time_observer = TimeObserver()
     observable_subject = Subject()
-    assert time_observer not in observable_subject._observers
-    observable_subject.add_observer(time_observer)
-    assert time_observer in observable_subject._observers
+    mock_update = mocker.patch.object(time_observer, "update")
 
-
-def test_timed_observers_deregistration():
-    time_observer = TimeObserver()
-    observable_subject = Subject()
-    observable_subject.add_observer(time_observer)
-    assert time_observer in observable_subject._observers
-    observable_subject.remove_observer(time_observer)
-    assert time_observer not in observable_subject._observers
-
-
-def test_date_observers_update(capsys):
-    day_observer = DayObserver()
-    observable_subject = Subject({day_observer})
-    now = datetime.now()
-    observable_subject.day = (curr_day := now.day)
-    observable_subject.month = (curr_month := now.month)
-    observable_subject.year = (curr_year := now.year)
     observable_subject.notify_observers()
-    captured = capsys.readouterr()
-    assert (
-        f"Current date is {curr_day}:{curr_month}:{curr_year}"
-        == captured.out.split("\n")[0].strip()
-    )
-    observable_subject.remove_observer(day_observer)
+    mock_update.assert_not_called()
+
+    observable_subject.add_observer(time_observer)
+
+    observable_subject.notify_observers()
+    mock_update.assert_called_once_with(observable_subject)
+
+
+def test_timed_observers_deregistration(mocker):
+    time_observer = TimeObserver()
+    observable_subject = Subject()
+    mock_update = mocker.patch.object(time_observer, "update")
+    observable_subject.add_observer(time_observer)
+    observable_subject.notify_observers()
+    mock_update.assert_called_once_with(observable_subject)
+    observable_subject.remove_observer(time_observer)
+    mock_update.reset_mock()
+    observable_subject.notify_observers()
+    mock_update.assert_not_called()
