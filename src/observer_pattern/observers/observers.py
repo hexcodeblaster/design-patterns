@@ -9,7 +9,7 @@ class TimeObserver(IObserver):
     def subscribe_to_observable(self, observable: IObservable) -> None:
         observable.add_observer(self)
 
-    def unsubscribe_to_subject(self, observable: IObservable) -> None:
+    def unsubscribe_from_observable(self, observable: IObservable) -> None:
         observable.remove_observer(self)
 
     @override
@@ -25,10 +25,10 @@ class TimeObserver(IObserver):
 
 
 class DayObserver(IObserver):
-    def subscribe_to_observer(self, observable: IObservable) -> None:
+    def subscribe_to_observable(self, observable: IObservable) -> None:
         observable.add_observer(self)
 
-    def unsubscribe_from_observer(self, observable: IObservable) -> None:
+    def unsubscribe_from_observable(self, observable: IObservable) -> None:
         observable.remove_observer(self)
 
     @override

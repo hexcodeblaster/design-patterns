@@ -1,4 +1,5 @@
 from datetime import datetime
+from unittest.mock import call
 
 from observer_pattern.observers.observers import TimeObserver
 from observer_pattern.observables.subjects.timed_reminder import Subject
@@ -12,9 +13,7 @@ def test_timed_observers_update(mocker):
     observable_subject.hour = now.hour
     observable_subject.minute = now.minute
     observable_subject.second = now.second
-    assert mock_update.call_count == 3
-    assert all(call == call(observable_subject) for call in mock_update.call_args_list)
-
+    mock_update.assert_has_calls([call(observable_subject)]*3)
 
 def test_timed_observers_registration(mocker):
     time_observer = TimeObserver()
@@ -41,3 +40,8 @@ def test_timed_observers_deregistration(mocker):
     mock_update.reset_mock()
     observable_subject.notify_observers()
     mock_update.assert_not_called()
+
+def test_removing_absent_observer():
+    time_observer = TimeObserver()
+    observable_subject = Subject()
+    observable_subject.remove_observer(time_observer)

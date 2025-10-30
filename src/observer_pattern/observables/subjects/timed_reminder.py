@@ -21,7 +21,7 @@ class Subject(IObservable):
 
     @override
     def remove_observer(self, observer: IObserver) -> None:
-        self._observers.remove(observer)
+        self._observers.discard(observer)
 
     @override
     def notify_observers(self) -> None:
@@ -33,8 +33,8 @@ class Subject(IObservable):
         return self._hour
 
     @hour.setter
-    def hour(self, hour_val: int | None = datetime.now().hour):
-        self._hour = hour_val
+    def hour(self, hour_val: int | None = None):
+        self._hour = hour_val or datetime.now().hour
         self.notify_observers()
 
     @property
@@ -42,8 +42,8 @@ class Subject(IObservable):
         return self._minute
 
     @minute.setter
-    def minute(self, minute_val: int | None = datetime.now().minute):
-        self._minute = minute_val
+    def minute(self, minute_val: int | None = None):
+        self._minute = minute_val or datetime.now().minute
         self.notify_observers()
 
     @property
@@ -51,8 +51,8 @@ class Subject(IObservable):
         return self._second
 
     @second.setter
-    def second(self, second_val: int | None = datetime.now().second):
-        self._second = second_val
+    def second(self, second_val: int | None = None):
+        self._second = second_val or datetime.now().second
         self.notify_observers()
 
     @property
@@ -60,8 +60,8 @@ class Subject(IObservable):
         return self._day
 
     @day.setter
-    def day(self, day_val: int | None = datetime.now().day):
-        self._day = day_val
+    def day(self, day_val: int | None = None):
+        self._day = day_val or datetime.now().day
         self.notify_observers()
 
     @property
@@ -69,8 +69,8 @@ class Subject(IObservable):
         return self._month
 
     @month.setter
-    def month(self, month_val: int | None = datetime.now().month):
-        self._month = month_val
+    def month(self, month_val: int | None = None):
+        self._month = month_val or datetime.now().month
         self.notify_observers()
 
     @property
@@ -78,6 +78,6 @@ class Subject(IObservable):
         return self._year
 
     @year.setter
-    def year(self, year_val: int | None = datetime.now().year):
-        self._year = year_val
+    def year(self, year_val: int | None = None):
+        self._year = year_val or datetime.now().year
         self.notify_observers()
