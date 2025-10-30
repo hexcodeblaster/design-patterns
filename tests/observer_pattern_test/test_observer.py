@@ -1,8 +1,8 @@
 from datetime import datetime
 from unittest.mock import call
 
-from observer_pattern.observers.observers import TimeObserver
 from observer_pattern.observables.subjects.timed_reminder import Subject
+from observer_pattern.observers.observers import TimeObserver
 
 
 def test_timed_observers_update(mocker):

@@ -1,8 +1,8 @@
 from typing import override
 
-from observer_pattern.observers.observer_interface import IObserver
 from observer_pattern.observables.observable_interface import IObservable
 from observer_pattern.observables.subjects.timed_reminder import Subject
+from observer_pattern.observers.observer_interface import IObserver
 
 
 class TimeObserver(IObserver):
@@ -21,6 +21,7 @@ class TimeObserver(IObserver):
             return_string = f"Current time is {hour}:{minutes}:{seconds}"
             print(return_string)
         return None
+
 
 class DayObserver(IObserver):
     def subscribe_to_observable(self, observable: IObservable) -> None:

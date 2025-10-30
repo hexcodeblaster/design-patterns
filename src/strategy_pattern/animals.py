@@ -1,7 +1,7 @@
 from strategy_pattern.strategies.animal_strategies.eating_strategies import (
+    CarnivoreEatingStrategy,
     EatingStrategy,
     HerbivoreEatingStrategy,
-    CarnivoreEatingStrategy,
     OmnivoreEatingStrategy,
 )
 

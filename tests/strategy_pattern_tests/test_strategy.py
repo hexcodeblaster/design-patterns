@@ -1,4 +1,4 @@
-from strategy_pattern.animals import Horse, Lion, Human
+from strategy_pattern.animals import Horse, Human, Lion
 
 
 def test_herbivore_strategy(capsys):
