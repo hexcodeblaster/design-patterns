@@ -13,7 +13,8 @@ def test_timed_observers_update(mocker):
     observable_subject.hour = now.hour
     observable_subject.minute = now.minute
     observable_subject.second = now.second
-    mock_update.assert_has_calls([call(observable_subject)]*3)
+    mock_update.assert_has_calls([call(observable_subject)] * 3)
+
 
 def test_timed_observers_registration(mocker):
     time_observer = TimeObserver()
@@ -40,6 +41,7 @@ def test_timed_observers_deregistration(mocker):
     mock_update.reset_mock()
     observable_subject.notify_observers()
     mock_update.assert_not_called()
+
 
 def test_removing_absent_observer():
     time_observer = TimeObserver()
